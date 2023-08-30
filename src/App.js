@@ -1,4 +1,5 @@
-import ExampleLayout from "./components/ExampleLayout";
+import ExampleLayout from "./pages/ExampleLayout";
+import "./App.scss"
 
 function App() {
   return (

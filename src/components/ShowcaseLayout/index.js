@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
-// import PropTypes from "prop-types";
 import _ from "lodash";
 import { Responsive, WidthProvider } from "react-grid-layout";
-import "./style.css"
+import "./style.scss";
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
 
 const generateLayout = () => {
@@ -40,12 +39,11 @@ const ShowcaseLayout = (props) => {
             Static - {i}
           </span>
         ) : (
-          <span className="text">{l.i}</span>
+          <span className="text">{l.i === "1" ? "i am 1" : l.i}</span>
         )}
       </div>
     ));
   };
-  console.log(layouts)
   const onBreakpointChange = (breakpoint) => {
     setCurrentBreakpoint(breakpoint);
   };
@@ -67,7 +65,7 @@ const ShowcaseLayout = (props) => {
   const onNewLayout = () => {
     setLayouts({ lg: generateLayout() });
   };
-
+  console.log(layouts[1])
   return (
     <div>
       <div>
@@ -92,10 +90,6 @@ const ShowcaseLayout = (props) => {
     </div>
   );
 };
-
-// ShowcaseLayout.propTypes = {
-//   onLayoutChange: PropTypes.func.isRequired,
-// };
 
 ShowcaseLayout.defaultProps = {
   className: "layout",

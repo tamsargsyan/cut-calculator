@@ -1,6 +1,7 @@
 import { useState } from "react";
-import ShowcaseLayout from "../ShowcaseLayout";
-import "./style.css"
+import DimensionsFields from "../../components/DimensionsFields";
+import ShowcaseLayout from "../../components/ShowcaseLayout";
+import "./style.scss";
 
 const ExampleLayout = () => {
   const [layout, setLayout] = useState([]);
@@ -17,8 +18,16 @@ const ExampleLayout = () => {
     ));
   };
 
+  const [dimensions, setDimensions] = useState({
+    length: "",
+    width: "",
+    quantity: "",
+  });
+  console.log(layout[1]);
+
   return (
-    <div>
+    <div className="container">
+      <DimensionsFields setDimensions={setDimensions} dimensions={dimensions} />
       <div className="layoutJSON">
         Displayed as <code>[x, y, w, h]</code>:
         <div className="columns">{stringifyLayout()}</div>

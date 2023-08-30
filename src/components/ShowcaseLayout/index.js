@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from "react";
-import PropTypes from "prop-types";
+import { useState, useEffect } from "react";
+// import PropTypes from "prop-types";
 import _ from "lodash";
 import { Responsive, WidthProvider } from "react-grid-layout";
 import "./style.css"
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
 
-// Define generateLayout function
 const generateLayout = () => {
   return _.map(_.range(0, 25), (item, i) => {
     const y = Math.ceil(Math.random() * 4) + 1;
@@ -94,9 +93,9 @@ const ShowcaseLayout = (props) => {
   );
 };
 
-ShowcaseLayout.propTypes = {
-  onLayoutChange: PropTypes.func.isRequired,
-};
+// ShowcaseLayout.propTypes = {
+//   onLayoutChange: PropTypes.func.isRequired,
+// };
 
 ShowcaseLayout.defaultProps = {
   className: "layout",

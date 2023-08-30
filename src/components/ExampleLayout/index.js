@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import ReactDOM from "react-dom";
+import { useState } from "react";
 import ShowcaseLayout from "../ShowcaseLayout";
 import "./style.css"
 

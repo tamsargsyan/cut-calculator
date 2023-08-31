@@ -1,38 +1,22 @@
-import { useState } from "react";
+import { useSelector } from "react-redux";
 import DimensionsFields from "../../components/DimensionsFields";
 import ShowcaseLayout from "../../components/ShowcaseLayout";
 import "./style.scss";
 
 const ExampleLayout = () => {
-  const [layout, setLayout] = useState([]);
-
-  const onLayoutChange = (newLayout) => {
-    setLayout(newLayout);
-  };
-
-  const stringifyLayout = () => {
-    return layout.map((l) => (
-      <div className="layoutItem" key={l.i}>
-        <b>{l.i}</b>: [{l.x}, {l.y}, {l.w}, {l.h}]
-      </div>
-    ));
-  };
-
-  const [dimensions, setDimensions] = useState({
-    length: "",
-    width: "",
-    quantity: "",
-  });
-  console.log(layout[1]);
-
+  // const dimensions = useSelector((state) => state.layoutData);
+  // console.log(dimensions);
   return (
     <div className="container">
-      <DimensionsFields setDimensions={setDimensions} dimensions={dimensions} />
-      <div className="layoutJSON">
-        Displayed as <code>[x, y, w, h]</code>:
-        <div className="columns">{stringifyLayout()}</div>
-      </div>
-      <ShowcaseLayout onLayoutChange={onLayoutChange} />
+      {/* <div className="dimensionsFileds"> */}
+        {/* {dimensions.map((dim, i) => ( */}
+          {/* <div className="dimensionField" key={i}> */}
+            {/* <h1>{i + 1}</h1> */}
+            <DimensionsFields />
+          {/* </div> */}
+        {/* ))} */}
+      {/* </div> */}
+      <ShowcaseLayout />
     </div>
   );
 };

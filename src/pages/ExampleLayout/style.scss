@@ -1,5 +1,9 @@
 .container {
-  padding: 20px;
+  padding: 20px 0 20px 30px;
+  & .dimensionsFileds {
+    display: flex;
+    gap: 30px;
+  }
 }
 .react-grid-layout {
   background: #eee;
@@ -24,9 +28,6 @@
 }
 .react-grid-item.resizing {
   opacity: 0.9;
-}
-.react-grid-item.static {
-  background: #cce;
 }
 .react-grid-item .text {
   font-size: 24px;

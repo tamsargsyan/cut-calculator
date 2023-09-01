@@ -8,3 +8,6 @@ function App() {
 }
 
 export default App;
+
+// https://stackoverflow.com/questions/53812280/2d-bin-packing-algorithm
+// https://github.com/solomon-b/greedypacker

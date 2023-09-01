@@ -6,16 +6,16 @@ export const dimensionsSchema = yup.object().shape({
     .required("Length is a required field")
     .test(
       "is-greater-than-70",
-      "Length must be greater than 70",
-      (value) => parseInt(value) >= 70
+      "Length must be greater than 70mm and lower than 2770mm",
+      (value) => parseInt(value) >= 70 && parseInt(value) <= 2770
     ),
   width: yup
     .string()
     .required("Width is a required field")
     .test(
       "is-greater-than-70",
-      "Width must be greater than 70",
-      (value) => parseInt(value) >= 70
+      "Width must be greater than 70mm and lower than 2040mm",
+      (value) => parseInt(value) >= 70 && parseInt(value) <= 2040
     ),
   quantity: yup
     .string()

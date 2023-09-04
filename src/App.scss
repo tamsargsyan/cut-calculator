@@ -21,3 +21,15 @@ button {
   border: none;
   outline: none;
 }
+.container {
+  // padding: 20px 0 20px 30px;
+  width: fit-content;
+  display: flex;
+  & .dimensionsFileds {
+    display: flex;
+    gap: 30px;
+  }
+}
+body::-webkit-scrollbar {
+  display: none;
+}

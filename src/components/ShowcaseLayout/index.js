@@ -1,133 +1,126 @@
 import "./style.scss";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
+
+const payload = [
+  {
+    length: 300,
+    width: 200,
+    quantity: 1,
+  },
+  {
+    length: 100,
+    width: 300,
+    quantity: 1,
+  },
+  {
+    length: 240,
+    width: 120,
+    quantity: 1,
+  },
+  {
+    length: 200,
+    width: 240,
+    quantity: 1,
+  },
+  {
+    length: 400,
+    width: 100,
+    quantity: 1
+  },
+  {
+    length: 1000,
+    width: 1000,
+    quantity: 2,
+  }
+]
 
 const ShowcaseLayout = () => {
-  const layoutData = useSelector((state) => state.layoutData);
-  const updatedLayoutData = layoutData.reduce((acc, item) => {
+  const updatedLayoutData = payload.reduce((acc, item) => {
     const { quantity, ...rest } = item;
     return acc.concat(Array.from({ length: quantity }, () => ({ ...rest })));
   }, []);
-
+  const sheetSize = {
+    length: 2770,
+    width: 2040
+  }
   //@info percent value
   const percent = 43.5;
   const calcPercent = (val) => {
     return Math.floor((val * percent) / 100);
   };
-  const generateLayout1 = () => {
-    return updatedLayoutData.map((l, i) => {
-      return {
-        x: 0,
-        y: 0,
-        w: l.length,
-        h: l.width,
+  const generateLayout = () => {
+    const layout = [];
+    let currentX = 0;
+    let currentY = 0;
+    let maxHeightInRow = 0; // Track the maximum height in the current row
+
+    const sortedData = [...updatedLayoutData];
+    sortedData.sort((a, b) => {
+      if (b.width === a.width) {
+        // If widths are the same, prioritize by length
+        return b.length - a.length;
+      }
+      return b.width - a.width;
+    });
+
+    sortedData.forEach((item, i) => {
+      if (currentX + item.length > sheetSize.length) {
+        // If the item's length is greater than the remaining space in the current row,
+        // start a new row.
+        currentX = 0;
+        currentY = maxHeightInRow; // Move to the height of the previous row
+        maxHeightInRow = 0; // Reset the maximum height in the current row
+      }
+
+      const layoutItem = {
+        x: currentX,
+        y: currentY,
+        w: item.length,
+        h: item.width,
         i: i.toString(),
         static: false,
       };
+
+      layout.push(layoutItem);
+
+      // Update the maximum height in the current row
+      maxHeightInRow = Math.max(maxHeightInRow, currentY + item.width);
+
+      // Move to the next position to the right
+      currentX += item.length;
     });
+
+    return layout;
   };
 
-  const sortedData = [...generateLayout1()];
 
-  sortedData.sort((a, b) => b.h - a.h);
-
-  sortedData.forEach((obj, index) => {
-    obj.i = index.toString();
-  });
-
-  const solveCuttingStockWithMargins = (
-    stockWidth,
-    stockHeight,
-    sewingMargin
-  ) => {
-    const pieces = [...generateLayout1()]; // Assuming generateLayout1 returns the pieces
-    console.log(pieces, "pieces");
-
-    pieces.forEach((piece) => {
-      let width = calcPercent(piece.w);
-      let height = calcPercent(piece.h);
-      width += sewingMargin;
-      height += sewingMargin;
-    });
-
-    const bins = [];
-    pieces.forEach((piece) => {
-      let placed = false;
-      const width = calcPercent(piece.w);
-      const height = calcPercent(piece.h);
-      for (const bin of bins) {
-        if (bin.remainingWidth >= width && bin.remainingHeight >= height) {
-          bin.items.push(piece);
-          bin.remainingWidth -= width;
-          placed = true;
-          break;
-        }
-      }
-
-      // If not placed, create a new bin
-      if (!placed) {
-        const newBin = {
-          remainingWidth: stockWidth - width,
-          remainingHeight: stockHeight,
-          items: [piece],
-        };
-        bins.push(newBin);
-      }
-    });
-
-    return bins;
-  };
-
-  const cuttingBins = solveCuttingStockWithMargins(1204, 886, 0); // 10mm sewing margin
-  const sewingMarginX = 0; // Adjust this value as needed
-  const sewingMarginY = 0;
+  // console.log(generateLayout())
   const generateCuttingDOM = () => {
-    let currentX = 0;
-    let currentY = 0;
-
-    return cuttingBins.map((bin, binIndex) => (
-      <div key={binIndex} className="cutting-bin">
-        {bin.items.map((item, itemIndex) => {
-          const width = calcPercent(item.w);
-          const height = calcPercent(item.h);
-
-          const marginLeft = currentX + sewingMarginX;
-          const marginTop = currentY + sewingMarginY;
-
-          // Update currentX and currentY for the next piece placement
-          currentX += width + sewingMarginX;
-          if (currentX + width > 1204) {
-            // Move to the next row
-            currentX = 0;
-            currentY += height + sewingMarginY;
-          }
-
-          return (
-            <div
-              key={itemIndex}
-              className="cut-container"
-              style={{
-                width: `${width}px`,
-                height: `${height}px`,
-                marginLeft: `${marginLeft}px`,
-                marginTop: `${marginTop}px`,
-              }}
-            >
-              <div className="cut-width">{item.w}</div>
-              <span className="text"></span>
-              <div className="cut-height">{item.h}</div>
-            </div>
-          );
-        })}
-      </div>
-    ));
+    return generateLayout().map((bin, binIndex) => {
+      const width = calcPercent(bin.w)
+      const height = calcPercent(bin.h)
+      const marginLeft = calcPercent(bin.x)
+      const marginTop = calcPercent(bin.y)
+      return (
+        <div key={binIndex} className="cutting-bin">
+          <div
+            className="cut-container"
+            style={{
+              width: `${width}px`,
+              height: `${height}px`,
+              marginLeft: `${marginLeft}px`,
+              marginTop: `${marginTop}px`,
+            }}
+          >
+            <div className="cut-width">{bin.w}</div>
+            <span className="text"></span>
+            <div className="cut-height">{bin.h}</div>
+          </div>
+        </div>
+      )
+    })
   };
 
-  console.log(cuttingBins);
-
-  // https://stackoverflow.com/questions/49084941/2-dimensional-cutting-rod-algorithm
-  // https://medium.com/analytics-vidhya/cutting-stock-problem-1d-df976f7263cd
-  // https://github.com/staho/2d-cut-optimization#npm-start
-  
   return (
     <div className="cut-layout-container">
       <div className="cut-layout-width">2770 mm</div>
@@ -138,7 +131,3 @@ const ShowcaseLayout = () => {
 };
 
 export default ShowcaseLayout;
-
-// https://jsfiddle.net/pcfgxedv/1/
-// best fit (descreasing)
-// We present an asymptotic fully polynomial approximation scheme for strip-packing, or packing rectangles into a rectangle of fixed width and minimum height, a classical NP-hard cutting-stock problem. The algorithm, based on a new linear-programming relaxation, finds a packing of n rectangles whose total height is within a factor of (1 + ε) of optimal (up to an additive term), and has running time polynomial both in n and in 1/ε.

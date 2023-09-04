@@ -1,11 +1,7 @@
 import { ActionTypes } from "./constants";
 
 const initialState = {
-  layoutData: [{
-    length: "",
-    width: "",
-    quantity: ""
-  }],
+  layoutData: [],
 };
 
 const reducer = (state = initialState, action) => {

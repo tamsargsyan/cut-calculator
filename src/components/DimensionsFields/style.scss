@@ -103,3 +103,74 @@
   font-weight: 500;
   font-size: 14px;
 }
+
+th {
+  background: #ddd;
+  padding: 8px;
+  border: none;
+}
+.row {
+  border: 1px solid #ddd;
+  transition: 0.3s ease;
+}
+.row:hover {
+  background: rgb(200, 230, 201);
+}
+.row-field {
+  outline: none;
+  padding: 8px;
+  background: transparent;
+  border: 1px solid transparent;
+  border: none;
+  transition: 0.3s ease;
+}
+.row-field:focus {
+  background: #fff;
+  border: 1px solid #ddd;
+  border: none;
+}
+td,
+th {
+  border: 1px solid #dddddd;
+}
+.rowNumber {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px;
+  // border: none
+}
+.dimensionsForm {
+  max-height: 100vh;
+  overflow-y: auto;
+  padding-bottom: 40px;
+  // padding: 0 30px 20px 0;
+}
+// /* width */
+// .dimensionsForm::-webkit-scrollbar {
+//   width: 5px;
+// }
+
+// /* Track */
+// .dimensionsForm::-webkit-scrollbar-track {
+//   background: #f1f1f1;
+// }
+
+// /* Handle */
+// .dimensionsForm::-webkit-scrollbar-thumb {
+//   background: #888;
+//   border-radius: 6px;
+// }
+
+// /* Handle on hover */
+// .dimensionsForm::-webkit-scrollbar-thumb:hover {
+//   background: #555;
+// }
+.row-btn {
+  padding: 0;
+  & > button {
+    padding: 10px;
+    background: #576f72;
+    color: #fff;
+  }
+}

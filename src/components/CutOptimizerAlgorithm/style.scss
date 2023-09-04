@@ -1,0 +1,63 @@
+.cut-layout-container {
+  position: relative;
+  & .cut-layout-width {
+    // width: 100%;
+    // text-align: center;
+    margin-bottom: 10px;
+  }
+  & .cut-layout-height {
+    position: absolute;
+    left: -50px;
+    top: 50%;
+    transform: translateY(-50%) rotate(-90deg);
+  }
+  & .cut-layout {
+    // width: 1204px;
+    // height: 886px;
+    background-color: #dbbc8c;
+    background-image: url(../../assets/layer.jpeg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    & .cut-container {
+      background-color: rgba(0, 255, 0, 0.3);
+      color: #333;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      top: 0;
+      left: 0;
+      user-select: none;
+      transition: 400ms ease;
+      & > .cut-width,
+      .cut-height {
+        position: absolute;
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 1px;
+      }
+      & .cut-width {
+        top: 2px;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      & .cut-height {
+        top: 50%;
+        transform: translateY(-50%) rotate(-90deg);
+        left: 2px;
+      }
+      & .rotateBtn {
+        & .rotateImg {
+          width: 20px;
+          height: 20px;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+        }
+      }
+    }
+  }
+}

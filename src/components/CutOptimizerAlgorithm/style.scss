@@ -1,3 +1,8 @@
+.cut-optimizer-container {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+}
 .cut-layout-container {
   position: relative;
   & .cut-layout-width {
@@ -57,6 +62,9 @@
           left: 50%;
           transform: translate(-50%, -50%);
         }
+      }
+      &:hover {
+        opacity: 0.6;
       }
     }
   }

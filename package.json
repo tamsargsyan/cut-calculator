@@ -1,5 +1,6 @@
 {
   "name": "cut-calculator",
+  "homepage": "https://prod.machtech.site/301/build/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

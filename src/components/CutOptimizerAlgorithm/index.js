@@ -25,13 +25,18 @@ const CutOptimizerAlgorithm = ({ setOpacity }) => {
     const [sheets, setSheets] = useState([])
 
     useEffect(() => {
-        if (optimizedsShapes.width <= SHEET_WIDTH && optimizedsShapes.height <= SHEET_HEIGHT) {
-            setSheets((prev) => ([{
-                ...prev,
-                sheet_id: uniqueId,
-                ...optimizedsShapes
-            }]))
-        }
+      // if (
+      //   optimizedsShapes.width <= SHEET_WIDTH &&
+      //   optimizedsShapes.height <= SHEET_HEIGHT
+      // ) {
+      // }
+      setSheets(prev => [
+        {
+          ...prev,
+          sheet_id: uniqueId,
+          ...optimizedsShapes,
+        },
+      ]);
     }, [layoutData])
 
     const percent = 43.5;

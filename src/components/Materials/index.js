@@ -1,30 +1,11 @@
-import { useState } from "react";
-import LAYER_1 from "../../assets/layers/1.jpg";
-import LAYER_2 from "../../assets/layers/2.jpg";
-import LAYER_3 from "../../assets/layers/3.jpg";
-import LAYER_4 from "../../assets/layers/4.jpg";
 import "./style.scss";
+import { useDispatch, useSelector } from "react-redux";
+import { materials } from "./materialsData";
+import { getMaterial } from "../../redux/actions";
 
 const Materials = () => {
-  const materials = [
-    {
-      id: 1,
-      img: LAYER_1,
-    },
-    {
-      id: 2,
-      img: LAYER_2,
-    },
-    {
-      id: 3,
-      img: LAYER_3,
-    },
-    {
-      id: 4,
-      img: LAYER_4,
-    },
-  ];
-  const [activeMaterial, setActiveMaterial] = useState(null);
+  const dispatch = useDispatch();
+  const materialId = useSelector(state => state.materialId);
 
   return (
     <div className='materials-wrapper'>
@@ -33,10 +14,10 @@ const Materials = () => {
         {materials.map(material => (
           <div
             className={`${
-              activeMaterial === material.id && "active"
+              materialId === material.id && "active"
             } material-item`}
             key={material.id}
-            onClick={() => setActiveMaterial(material.id)}>
+            onClick={() => dispatch(getMaterial(material.id))}>
             <img src={material.img} alt='Layer' />
           </div>
         ))}

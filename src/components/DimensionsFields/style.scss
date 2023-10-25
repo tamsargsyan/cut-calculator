@@ -1,176 +1,55 @@
-:root {
-  --input-color: #99a3ba;
-  --input-border: #cdd9ed;
-  --input-background: #fff;
-  --input-placeholder: #cbd1dc;
-  --input-border-focus: #576f72;
-  --group-color: var(--input-color);
-  --group-border: var(--input-border);
-  --group-background: #eef4ff;
-  --group-color-focus: #fff;
-  --group-border-focus: var(--input-border-focus);
-  --group-background-focus: #576f72;
-  --error-color: #d22b2b;
+.color-wrapper {
+  width: 47px;
+  height: 38px;
 }
-.form-field {
-  display: block;
-  width: 100%;
-  padding: 8px 16px;
-  line-height: 25px;
-  font-size: 14px;
-  font-weight: 500;
-  font-family: inherit;
-  border-radius: 6px;
-  -webkit-appearance: none;
-  color: var(--input-color);
-  border: 1px solid var(--input-border);
-  background: var(--input-background);
-  transition: border 0.3s ease;
-  // &::placeholder {
-  //   color: var(--input-placeholder);
-  // }
-  &:focus {
-    outline: none;
-    border-color: var(--input-border-focus);
-  }
-}
-
-.form-group {
-  position: relative;
-  width: 300px;
-  margin-bottom: 15px;
-  & > div {
-    display: flex;
-  }
-  & > div > label,
-  & > div > .form-field {
-    white-space: nowrap;
-    display: block;
-    &:not(:first-child):not(:last-child) {
-      border-radius: 0;
-    }
-    &:first-child {
-      border-radius: 6px 0 0 6px;
-    }
-    &:last-child {
-      border-radius: 0 6px 6px 0;
-    }
-    &:not(:first-child) {
-      margin-left: -1px;
-    }
-  }
-  .form-field {
-    position: relative;
-    z-index: 1;
-    flex: 1 1 auto;
-    width: 1%;
-    margin-top: 0;
-    margin-bottom: 0;
-  }
-  & div > label {
-    text-align: center;
-    padding: 8px 12px;
-    font-size: 14px;
-    line-height: 25px;
-    width: 80px;
-    color: var(--group-color);
-    background: var(--group-background);
-    border: 1px solid var(--group-border);
-    transition: background 0.3s ease, border 0.3s ease, color 0.3s ease;
-  }
-  & > div:focus-within {
-    & > label {
-      color: var(--group-color-focus);
-      background: var(--group-background-focus);
-      border-color: var(--group-border-focus);
-    }
-  }
-  & > button {
-    background: var(--input-border-focus);
-    color: var(--input-background);
-    padding: 10px 25px;
-    border-radius: 6px;
-    transition: 0.3s ease;
-  }
-  & > button:disabled {
-    background-color: var(--group-background);
-    color: var(--group-color);
-    cursor: not-allowed;
-  }
-}
-.error {
-  color: var(--error-color);
-  font-weight: 500;
-  font-size: 14px;
-}
-
-th {
-  background: #ddd;
-  padding: 8px;
-  border: none;
-}
-.row {
-  border: 1px solid #ddd;
-  transition: 0.3s ease;
-}
-.row:hover {
-  background: rgb(200, 230, 201);
-}
-.row-field {
-  outline: none;
-  padding: 8px;
-  background: transparent;
-  border: 1px solid transparent;
-  border: none;
-  transition: 0.3s ease;
-}
-.row-field:focus {
-  background: #fff;
-  border: 1px solid #ddd;
-  border: none;
-}
-td,
-th {
-  border: 1px solid #dddddd;
-}
-.rowNumber {
+.border-selector {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 8px;
-  // border: none
+  font-size: 10px;
 }
-.dimensionsForm {
-  max-height: 100vh;
-  overflow-y: auto;
-  padding-bottom: 40px;
-  // padding: 0 30px 20px 0;
+.left-part {
+  float: left;
+  margin-right: 2px;
+  margin-top: 14px;
+  text-align: center;
 }
-// /* width */
-// .dimensionsForm::-webkit-scrollbar {
-//   width: 5px;
-// }
-
-// /* Track */
-// .dimensionsForm::-webkit-scrollbar-track {
-//   background: #f1f1f1;
-// }
-
-// /* Handle */
-// .dimensionsForm::-webkit-scrollbar-thumb {
-//   background: #888;
-//   border-radius: 6px;
-// }
-
-// /* Handle on hover */
-// .dimensionsForm::-webkit-scrollbar-thumb:hover {
-//   background: #555;
-// }
-.row-btn {
-  padding: 0;
-  & > button {
-    padding: 10px;
-    background: #576f72;
-    color: #fff;
-  }
+.center-part {
+  text-align: center;
+}
+.border-top,
+.border-bottom {
+  margin: 0 2px;
+}
+.right-part {
+  float: left;
+  margin-left: 2px;
+  margin-top: 14px;
+  text-align: center;
+}
+th,
+td {
+  text-align: left;
+  vertical-align: top;
+  padding: 0.75rem;
+}
+.plane-input {
+  padding: 10px;
+  outline: none;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  transition: 0.3s ease;
+}
+.plane-input:focus {
+  border: 1px solid #0a78be;
+}
+.add-btn {
+  outline: none;
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 10px;
+}
+thead tr th {
+  border-bottom: 1px solid #ddd;
+}
+.close {
+  font-size: 30px;
 }

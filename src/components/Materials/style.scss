@@ -1,0 +1,22 @@
+.materials-wrapper {
+  width: 100%;
+  margin-bottom: 20px;
+  & .materials-title {
+    font-weight: 600;
+    font-size: 28px;
+  }
+  & .materials-items-wrapper {
+    display: flex;
+    gap: 15px;
+    & .material-item {
+      cursor: pointer;
+      width: 60px;
+      height: 60px;
+      border: 1px solid transparent;
+      transition: 0.3s ease;
+    }
+    & .material-item.active {
+      border: 1px solid rgb(21, 21, 80);
+    }
+  }
+}

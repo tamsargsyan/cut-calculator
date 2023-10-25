@@ -12,11 +12,11 @@
       cursor: pointer;
       width: 60px;
       height: 60px;
-      border: 1px solid transparent;
+      border: 3px solid transparent;
       transition: 0.3s ease;
     }
     & .material-item.active {
-      border: 1px solid rgb(21, 21, 80);
+      border: 3px solid #0a78be;
     }
   }
 }

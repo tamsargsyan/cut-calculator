@@ -53,10 +53,26 @@ const DimensionsFields = () => {
           <tr className='dim' key={dim.id}>
             <td className='layer-id'>{i + 1}</td>
             <td className='plane-width'>
-              <input type='text' className='plane-input' value={dim.width} />
+              <input
+                type='text'
+                className='plane-input'
+                value={dim.width}
+                style={{
+                  borderTop: border.topPart ? "solid" : "unset",
+                  borderBottom: border.bottomPart ? "solid" : "unset",
+                }}
+              />
             </td>
             <td className='plane-height'>
-              <input type='text' className='plane-input' value={dim.height} />
+              <input
+                type='text'
+                className='plane-input'
+                value={dim.height}
+                style={{
+                  borderLeft: border.leftPart ? "solid" : "unset",
+                  borderRight: border.rightPart ? "solid" : "unset",
+                }}
+              />
             </td>
             <td className='plane-quantity'>
               <input type='text' className='plane-input' value={dim.quantity} />
@@ -252,6 +268,14 @@ const DimensionsFields = () => {
                   width: e.target.value,
                 }))
               }
+              style={{
+                borderTop: border.topPart
+                  ? "2px solid #333"
+                  : "1px solid inherit",
+                borderBottom: border.bottomPart
+                  ? "2px solid #333"
+                  : "1px solid inherit",
+              }}
             />
           </td>
           <td className='plane-height'>
@@ -265,6 +289,14 @@ const DimensionsFields = () => {
                   height: e.target.value,
                 }))
               }
+              style={{
+                borderLeft: border.leftPart
+                  ? "2px solid #333"
+                  : "1px solid inherit",
+                borderRight: border.rightPart
+                  ? "2px solid #333"
+                  : "1px solid inherit",
+              }}
             />
           </td>
           <td className='plane-quantity'>

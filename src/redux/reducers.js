@@ -26,13 +26,13 @@ const reducer = (state = initialState, action) => {
         ),
       };
     case ActionTypes.UPDATE_DIMENSION:
+      const { id, key, value } = action.payload;
       const updatedDimensions = state.dimensions.map(dim => {
-        if (dim.id === action.payload.dimension.id) {
-          return { ...dim, ...action.payload.dimension };
+        if (dim.id === id) {
+          return { ...dim, [key]: value };
         }
         return dim;
       });
-
       return {
         ...state,
         dimensions: updatedDimensions,

@@ -18,9 +18,7 @@ export const removeDimension = id => ({
     id,
   },
 });
-export const updateDimension = dimension => ({
-  type: ActionTypes.UPDATE_DIMENSION,
-  payload: {
-    dimension,
-  },
+export const updateDimension = (id, key, value) => ({
+  type: "UPDATE_DIMENSION",
+  payload: { id, key, value },
 });

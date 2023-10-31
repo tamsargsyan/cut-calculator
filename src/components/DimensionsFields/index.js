@@ -1,11 +1,11 @@
 import "./style.scss";
-import { useDispatch, useSelector } from "react-redux";
+import { connect, useDispatch, useSelector } from "react-redux";
 import {
   addDimension,
   removeDimension,
   updateDimension,
 } from "../../redux/actions";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const DimensionsFields = () => {
   const dimensions = useSelector(state => state.dimensions);
@@ -28,12 +28,36 @@ const DimensionsFields = () => {
     topPart: "",
     bottomPart: "",
   });
+  console.log(border.topPart !== "" && border.topPart);
   const borderWidth = border => {
     if (border === "0.4") return "2";
     else if (border === "1") return "3";
     else if (border === "2") return "4";
     return "";
   };
+
+  const [editedDimensions, setEditedDimensions] = useState([]);
+
+  const handleWidthChange = (index, newValue) => {
+    const newDimensions = [...editedDimensions];
+    newDimensions[index].width = newValue;
+    setEditedDimensions(newDimensions);
+  };
+
+  const handleHeightChange = (index, newValue) => {
+    const newDimensions = [...editedDimensions];
+    newDimensions[index].height = newValue;
+    setEditedDimensions(newDimensions);
+  };
+
+  const handleQuantityChange = (index, newValue) => {
+    const newDimensions = [...editedDimensions];
+    newDimensions[index].quantity = newValue;
+    setEditedDimensions(newDimensions);
+  };
+  useEffect(() => {
+    setEditedDimensions(dimensions);
+  }, [dimensions]);
 
   return (
     <table>
@@ -49,7 +73,7 @@ const DimensionsFields = () => {
         </tr>
       </thead>
       <tbody>
-        {dimensions.map((dim, i) => (
+        {editedDimensions.map((dim, i) => (
           <tr className='dim' key={dim.id}>
             <td className='layer-id'>{i + 1}</td>
             <td className='plane-width'>
@@ -57,9 +81,12 @@ const DimensionsFields = () => {
                 type='text'
                 className='plane-input'
                 value={dim.width}
+                onChange={e => handleWidthChange(i, e.target.value)}
                 style={{
-                  borderTop: border.topPart ? "solid" : "unset",
-                  borderBottom: border.bottomPart ? "solid" : "unset",
+                  borderTop:
+                    dim.border.topPart !== "" ? "solid" : "1px solid #ddd",
+                  borderBottom:
+                    dim.border.bottomPart !== "" ? "solid" : "1px solid #ddd",
                 }}
               />
             </td>
@@ -68,14 +95,22 @@ const DimensionsFields = () => {
                 type='text'
                 className='plane-input'
                 value={dim.height}
+                onChange={e => handleHeightChange(i, e.target.value)}
                 style={{
-                  borderLeft: border.leftPart ? "solid" : "unset",
-                  borderRight: border.rightPart ? "solid" : "unset",
+                  borderLeft:
+                    dim.border.leftPart !== "" ? "solid" : "1px solid #ddd",
+                  borderRight:
+                    dim.border.rightPart !== "" ? "solid" : "1px solid #ddd",
                 }}
               />
             </td>
             <td className='plane-quantity'>
-              <input type='text' className='plane-input' value={dim.quantity} />
+              <input
+                type='text'
+                className='plane-input'
+                value={dim.quantity}
+                onChange={e => handleQuantityChange(i, e.target.value)}
+              />
             </td>
             <td className='border-selector'>
               <div className='left-part'>
@@ -235,9 +270,6 @@ const DimensionsFields = () => {
                 className='add-btn'
                 type='submit'
                 onClick={() => {
-                  console.log(dim.id);
-                  const dimId = dim.id;
-                  // update dimension here
                   dispatch(updateDimension({}));
                 }}>
                 Редактировать деталь
@@ -269,12 +301,9 @@ const DimensionsFields = () => {
                 }))
               }
               style={{
-                borderTop: border.topPart
-                  ? "2px solid #333"
-                  : "1px solid inherit",
-                borderBottom: border.bottomPart
-                  ? "2px solid #333"
-                  : "1px solid inherit",
+                borderTop: border.topPart !== "" ? "solid" : "1px solid #ddd",
+                borderBottom:
+                  border.bottomPart !== "" ? "solid" : "1px solid #ddd",
               }}
             />
           </td>
@@ -290,12 +319,9 @@ const DimensionsFields = () => {
                 }))
               }
               style={{
-                borderLeft: border.leftPart
-                  ? "2px solid #333"
-                  : "1px solid inherit",
-                borderRight: border.rightPart
-                  ? "2px solid #333"
-                  : "1px solid inherit",
+                borderLeft: border.leftPart !== "" ? "solid" : "1px solid #ddd",
+                borderRight:
+                  border.rightPart !== "" ? "solid" : "1px solid #ddd",
               }}
             />
           </td>
@@ -586,4 +612,12 @@ const DimensionsFields = () => {
   );
 };
 
-export default DimensionsFields;
+const mapStateToProps = state => ({
+  dimensions: state.dimensions,
+});
+
+const mapDispatchToProps = {
+  updateDimension,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(DimensionsFields);

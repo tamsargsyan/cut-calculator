@@ -1,9 +1,18 @@
-import ExampleLayout from "./components/ExampleLayout";
+// App.js
 
-function App() {
+import "./App.scss";
+import CutOptimizerAlgorithm from "./components/CutOptimizerAlgorithm";
+import DimensionsFields from "./components/DimensionsFields";
+import Materials from "./components/Materials";
+
+const App = () => {
   return (
-    <ExampleLayout />
+    <div className='container'>
+      <Materials />
+      <DimensionsFields />
+      <CutOptimizerAlgorithm />
+    </div>
   );
-}
+};
 
 export default App;

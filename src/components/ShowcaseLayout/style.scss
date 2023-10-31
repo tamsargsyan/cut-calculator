@@ -1,0 +1,86 @@
+// .react-grid-layout {
+//   position: relative;
+//   transition: height 200ms ease;
+// }
+// .react-grid-item {
+//   transition: all 200ms ease;
+//   transition-property: left, top;
+// }
+// .react-grid-item.cssTransforms {
+//   transition-property: transform;
+// }
+// .react-grid-item.resizing {
+//   z-index: 1;
+//   will-change: width, height;
+// }
+
+// .react-grid-item.react-draggable-dragging {
+//   transition: none;
+//   z-index: 3;
+//   will-change: transform;
+// }
+
+// .react-grid-item.react-grid-placeholder {
+//   background: red;
+//   opacity: 0.2;
+//   transition-duration: 100ms;
+//   z-index: 2;
+//   -webkit-user-select: none;
+//   -moz-user-select: none;
+//   -ms-user-select: none;
+//   -o-user-select: none;
+//   user-select: none;
+// }
+
+.cut-layout-container {
+  position: relative;
+  & .cut-layout-width {
+    // width: 100%;
+    // text-align: center;
+    margin-bottom: 10px;
+  }
+  & .cut-layout-height {
+    position: absolute;
+    left: -50px;
+    top: 50%;
+    transform: translateY(-50%) rotate(-90deg);
+  }
+  & .cut-layout {
+    width: 1204px;
+    height: 886px;
+    background-color: #dbbc8c;
+    background-image: url(../../assets/layers/1.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    & .cut-container {
+      background-color: rgba(0, 255, 0, 0.3);
+      color: #333;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      top: 0;
+      left: 0;
+      user-select: none;
+      transition: margin 0.3s ease;
+      & > .cut-width,
+      .cut-height {
+        position: absolute;
+        font-size: 10px;
+      }
+      & .cut-width {
+        top: 2px;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      & .cut-height {
+        top: 50%;
+        transform: translateY(-50%) rotate(-90deg);
+        left: 2px;
+      }
+    }
+  }
+}

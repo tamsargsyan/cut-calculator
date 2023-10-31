@@ -1,17 +1,31 @@
 {
   "name": "cut-calculator",
+  "homepage": "https://prod.machtech.site/301/build/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "antd": "^5.8.6",
+    "binpacking": "^0.0.1",
+    "cut-optimizer": "^0.1.1",
+    "formik": "^2.4.3",
+    "genetic-js": "^0.1.14",
+    "i": "^0.3.7",
     "lodash": "^4.17.21",
+    "maxrects-packer": "^2.7.3",
+    "npm": "^10.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-grid-layout": "^1.3.4",
+    "react-redux": "^8.1.2",
     "react-scripts": "5.0.1",
-    "web-vitals": "^2.1.4"
+    "redux": "^4.2.1",
+    "sass": "^1.66.1",
+    "web-vitals": "^2.1.4",
+    "yup": "^1.2.0"
   },
   "scripts": {
     "start": "react-scripts start",

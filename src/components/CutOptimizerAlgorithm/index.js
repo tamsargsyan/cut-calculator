@@ -1,7 +1,7 @@
 import { CutOptimizer, Shape } from "cut-optimizer";
 import "./style.scss";
 import { useSelector } from "react-redux";
-import ROTATE from "../../assets/rotate.png";
+// import ROTATE from "../../assets/rotate.png";
 import { useEffect, useState } from "react";
 import { uniqueId } from "lodash";
 import { materials } from "../Materials/materialsData";
@@ -115,7 +115,7 @@ const CutOptimizerAlgorithm = () => {
     }
 
     //console.log("sheetObj >>", sheetObj);
-  }, [dimensions]);
+  }, [dimensions, modifiedData]);
 
   // console.log("sheets", sheets);
   const percent = 43.5;

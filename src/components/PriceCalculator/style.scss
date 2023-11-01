@@ -1,0 +1,75 @@
+.price-calculator-wrapper {
+  font-size: 20px;
+  width: 600px;
+  margin: 30px 0;
+  margin-left: auto;
+  margin-right: 30px;
+  border: 1px solid #ddd;
+  padding: 30px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+  & .price-calculator-title {
+    font-weight: 600;
+  }
+  & .sheets-in-cutting,
+  .edge-length-wrapper,
+  .approximate-cost {
+    color: #999;
+    & .sheets-quantity {
+      color: #000;
+      font-weight: 500;
+    }
+  }
+  & .edge-length-wrapper {
+    & .thickness {
+      & p {
+        & span {
+          color: #000;
+          font-weight: 500;
+        }
+      }
+    }
+  }
+  & .approximate-cost {
+    & span {
+      color: #000;
+      font-weight: 500;
+    }
+  }
+  & .final-price-warning {
+    font-weight: 600;
+  }
+  & .attach-drawings-wrapper {
+    & .attach-drawings-warning {
+      font-weight: 600;
+    }
+    & .attach-add-btn {
+      background-color: #5cb85c;
+      color: #fff;
+    }
+  }
+  .btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    font-size: 20px;
+    padding: 10px 15px;
+    border-radius: 7px;
+    & img {
+      width: 20px;
+      height: 20px;
+    }
+  }
+  & .add-print-btns {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    & .add-to-cart-btn {
+      background-color: #e12243;
+      color: #fff;
+    }
+    & .print-btn {
+      border: 1px solid #ccc;
+    }
+  }
+}

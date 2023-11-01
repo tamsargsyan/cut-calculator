@@ -1,17 +1,17 @@
 import * as yup from "yup";
 
 export const dimensionsSchema = yup.object().shape({
-  length: yup
+  width: yup
     .string()
-    .required("Length is a required field")
+    .required("Width is a required field")
     .test(
       "is-greater-than-70",
       "Length must be greater than 70mm and lower than 2770mm",
       (value) => parseInt(value) >= 70 && parseInt(value) <= 2770
     ),
-  width: yup
+  height: yup
     .string()
-    .required("Width is a required field")
+    .required("Height is a required field")
     .test(
       "is-greater-than-70",
       "Width must be greater than 70mm and lower than 2040mm",

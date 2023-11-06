@@ -1,28 +1,29 @@
 import * as yup from "yup";
+import { SHEET_HEIGHT, SHEET_WIDTH } from "../components/CutOptimizerAlgorithm";
 
 export const dimensionsSchema = yup.object().shape({
   width: yup
     .string()
-    .required("Width is a required field")
+    .required("Լայնությունը պարտադիր է")
     .test(
       "is-greater-than-70",
-      "Length must be greater than 70mm and lower than 2770mm",
-      (value) => parseInt(value) >= 70 && parseInt(value) <= 2770
+      `Լայնությունը պետք է լինի 70-${SHEET_WIDTH} միջակայքում`,
+      value => parseInt(value) >= 70 && parseInt(value) <= SHEET_WIDTH
     ),
   height: yup
     .string()
-    .required("Height is a required field")
+    .required("Երկարությունը պարտադիր է")
     .test(
       "is-greater-than-70",
-      "Width must be greater than 70mm and lower than 2040mm",
-      (value) => parseInt(value) >= 70 && parseInt(value) <= 2040
+      `Երկարությունը պետք է լինի 70-${SHEET_HEIGHT} միջակայքում`,
+      value => parseInt(value) >= 70 && parseInt(value) <= SHEET_HEIGHT
     ),
   quantity: yup
     .string()
-    .required("Quantity is a required field")
+    .required("Քանակը պարտադիր է")
     .test(
       "is-greater-than-1",
-      "Quantity must be greater than 1",
-      (value) => parseInt(value) >= 1
+      "Քանակը պետք է լինի 0-ից մեծ",
+      value => parseInt(value) >= 1
     ),
 });

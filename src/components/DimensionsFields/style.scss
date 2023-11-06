@@ -63,3 +63,29 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
+.dimensions-wrapper {
+  max-height: 400px;
+  overflow-y: auto;
+}
+tbody tr:first-child,
+thead {
+  position: sticky;
+  top: 0;
+  background: #fff;
+  z-index: 1;
+}
+tbody tr:first-child {
+  top: 40px;
+}
+.dim {
+  box-shadow: 0 0 1px 1px #ddd;
+}
+td:has(input, button) {
+  padding-top: 25px;
+}
+.layer-id {
+  padding-top: 30px;
+}
+.plane-quantity input {
+  width: 100px;
+}

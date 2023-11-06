@@ -1,37 +1,47 @@
 import { useSelector } from "react-redux";
 import PLUS_ICON from "../../assets/icons/plus.svg";
 import "./style.scss";
-import { modifiedDataCalc } from "../CutOptimizerAlgorithm";
 
 const PriceCalculator = ({ sheets }) => {
+  let id = 0;
   const dimensions = useSelector(state => state.dimensions);
-  const modifiedData = modifiedDataCalc(dimensions);
-  const defaultPrice = 1000;
-  const quantityPrice = 100;
-  const borderPrice = 100;
-
-  const borderMultipliers = {
-    0.4: 0.4,
-    1: 1,
-    2: 2,
-  };
+  console.log(dimensions);
+  const modifiedData = dimensions.flatMap(item => {
+    if (+item.quantity > 1) {
+      return Array.from({ length: +item.quantity }, () => ({
+        ...item,
+        quantity: 1,
+        id: ++id,
+      }));
+    } else {
+      return [item];
+    }
+  });
 
   const multipliedDimensions = modifiedData.reduce(
     (acc, item) => {
       let width = parseFloat(item.width);
       let height = parseFloat(item.height);
+      let thick_0_4 = 0;
+      let thick_1 = 0;
+      let thick_2 = 0;
 
-      for (const part in item.border) {
-        if (borderMultipliers.hasOwnProperty(item.border[part])) {
-          let multiplier = borderMultipliers[item.border[part]];
+      if (item.border.bottomPart === "0.4") thick_0_4 += width;
+      if (item.border.topPart === "0.4") thick_0_4 += width;
+      if (item.border.leftPart === "0.4") thick_0_4 += height;
+      if (item.border.rightPart === "0.4") thick_0_4 += height;
+      if (item.border.bottomPart === "1") thick_1 += width;
+      if (item.border.topPart === "1") thick_1 += width;
+      if (item.border.leftPart === "1") thick_1 += height;
+      if (item.border.rightPart === "1") thick_1 += height;
+      if (item.border.bottomPart === "2") thick_2 += width;
+      if (item.border.topPart === "2") thick_2 += width;
+      if (item.border.leftPart === "2") thick_2 += height;
+      if (item.border.rightPart === "2") thick_2 += height;
 
-          if (part === "bottomPart" || part === "topPart") {
-            acc.thick_0_4 += width * multiplier;
-          } else if (part === "leftPart" || part === "rightPart") {
-            acc.thick_0_4 += height * multiplier;
-          }
-        }
-      }
+      acc.thick_0_4 += thick_0_4;
+      acc.thick_1 += thick_1;
+      acc.thick_2 += thick_2;
 
       return acc;
     },
@@ -39,52 +49,69 @@ const PriceCalculator = ({ sheets }) => {
   );
   const mmTom = val => val / 1000;
 
+  const sheetPrice = 24000;
+  const quantityPrice = 100;
+  const thick_0_4_price = 200;
+  const thick_1_price = 250;
+  const thick_2_price = 300;
+
   const finalPrice =
-    defaultPrice * sheets.length +
-    (multipliedDimensions.thick_0_4 +
-      multipliedDimensions.thick_1 +
-      multipliedDimensions.thick_2) *
-      borderPrice +
+    sheetPrice * sheets.length +
+    (mmTom(multipliedDimensions.thick_0_4) * thick_0_4_price +
+      mmTom(multipliedDimensions.thick_1) * thick_1_price +
+      mmTom(multipliedDimensions.thick_2) * thick_2_price) +
     quantityPrice * modifiedData.length;
+  const formattedAmount = new Intl.NumberFormat("en-US", {
+    minimumFractionDigits: 3,
+    maximumFractionDigits: 3,
+  }).format(finalPrice / 1000);
 
   return (
     <div className='price-calculator-wrapper'>
-      <p className='price-calculator-title'>Параметры раскроя:</p>
+      <p className='price-calculator-title'>Պարամետրեր:</p>
       <p className='sheets-in-cutting'>
-        Листов в раскрое:
+        Տախտակի քանակ:
         <span className='sheets-quantity'> {sheets.length}</span>
       </p>
       <p className='sheets-in-cutting'>
-        Всего деталей
+        Դետալների քանակ։
         <span className='sheets-quantity'> {modifiedData.length}</span>
       </p>
-      <div className='edge-length-wrapper'>
-        <p className='edge-length-title'>Длина кромки:</p>
-        <div className='thickness'>
-          <p>
-            толщиной 0.4мм:{" "}
-            <span>{Math.ceil(mmTom(multipliedDimensions.thick_0_4))} м.</span>
-          </p>
-          <p>
-            толщиной 1мм:{" "}
-            <span> {Math.ceil(mmTom(multipliedDimensions.thick_1))} м.</span>
-          </p>
-          <p>
-            толщиной 2мм:{" "}
-            <span>{Math.ceil(mmTom(multipliedDimensions.thick_2))} м.</span>
-          </p>
+      {multipliedDimensions.thick_0_4 ||
+      multipliedDimensions.thick_1 ||
+      multipliedDimensions.thick_2 ? (
+        <div className='edge-length-wrapper'>
+          <p className='edge-length-title'>Եզրաթուղթ:</p>
+          <div className='thickness'>
+            {multipliedDimensions.thick_0_4 !== 0 ? (
+              <p>
+                0,4 մմ հաստությամբ:{" "}
+                <span>{mmTom(multipliedDimensions.thick_0_4)} մ.</span>
+              </p>
+            ) : null}
+            {multipliedDimensions.thick_1 !== 0 ? (
+              <p>
+                1 մմ հաստությամբ{" "}
+                <span> {mmTom(multipliedDimensions.thick_1)} մ.</span>
+              </p>
+            ) : null}
+            {multipliedDimensions.thick_2 ? (
+              <p>
+                2 մմ հաստությամբ։{" "}
+                <span>{mmTom(multipliedDimensions.thick_2)} մ.</span>
+              </p>
+            ) : null}
+          </div>
         </div>
-      </div>
+      ) : null}
       <p className='approximate-cost'>
-        Приблизительная стоимость*:
-        <span>{finalPrice} руб.</span>
+        Նախնական արժեք*: <span>{formattedAmount} դրամ.</span>
       </p>
       <p className='final-price-warning'>
-        * Указанная цена может отличаться от конечной. Остаток листа может
-        отличаться от показанного на экране. Если Вам нужен остаток
-        определенного размера, внесите размеры в параметры деталей.
+        *Նշված գինը կարող է տարբերվել վերջնական գնից։ Տախտակի մնացած մասը կարող
+        է տարբերվել էկրանին ցուցադրվածից:
       </p>
-      <div className='attach-drawings-wrapper'>
+      {/* <div className='attach-drawings-wrapper'>
         <p className='attach-drawings-warning'>
           Если Вам требуется изготовление нестандартной детали, прикрепите
           чертежи к заказу.
@@ -98,7 +125,7 @@ const PriceCalculator = ({ sheets }) => {
       <div className='add-print-btns'>
         <button className='add-to-cart-btn btn'>Добавить в корзину</button>
         <button className='print-btn btn'>Печать</button>
-      </div>
+      </div> */}
     </div>
   );
 };

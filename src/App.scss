@@ -29,7 +29,7 @@ a {
   text-decoration: none;
   color: #0a78be;
 }
-.dim-price-wrapper{
+.dim-price-wrapper {
   display: flex;
   gap: 30px;
   // flex-direction: column;
@@ -46,4 +46,11 @@ a {
 }
 body::-webkit-scrollbar {
   display: none;
+}
+.error {
+  font-size: 10px;
+  color: #dd264e;
+  font-weight: 600;
+  margin: 7px 0;
+  width: 130px;
 }

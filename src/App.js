@@ -1,5 +1,3 @@
-// App.js
-
 import { useState } from "react";
 import "./App.scss";
 import CutOptimizerAlgorithm from "./components/CutOptimizerAlgorithm";

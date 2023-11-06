@@ -9,7 +9,7 @@ const Materials = () => {
 
   return (
     <div className='materials-wrapper'>
-      <p className='materials-title'>Выбор материала</p>
+      <p className='materials-title'>Հումքի ընտրություն</p>
       <div className='materials-items-wrapper'>
         {materials.map(material => (
           <div

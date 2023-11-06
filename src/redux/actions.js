@@ -19,6 +19,14 @@ export const removeDimension = id => ({
   },
 });
 export const updateDimension = (id, key, value) => ({
-  type: "UPDATE_DIMENSION",
+  type: ActionTypes.UPDATE_DIMENSION,
   payload: { id, key, value },
+});
+export const rotateDimension = (width, height, newId) => ({
+  type: ActionTypes.ROTATE_DIMENSION,
+  payload: {
+    width,
+    height,
+    newId,
+  },
 });

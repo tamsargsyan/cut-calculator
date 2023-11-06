@@ -1,6 +1,6 @@
 {
   "name": "cut-calculator",
-  "homepage": "https://prod.machtech.site/301/build/",
+  "homepage": "https://bitrix-24.am/cutcalc/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -10,7 +10,7 @@
     "@testing-library/user-event": "^13.5.0",
     "antd": "^5.8.6",
     "binpacking": "^0.0.1",
-    "cut-optimizer": "^0.1.1",
+    "cut-optimizer": "file:node_modules/cut-optimizer",
     "formik": "^2.4.3",
     "genetic-js": "^0.1.14",
     "i": "^0.3.7",

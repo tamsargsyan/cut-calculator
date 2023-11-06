@@ -1,12 +1,17 @@
 .cut-optimizer-container {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
   gap: 50px;
   margin-top: 30px;
 }
 .cut-layout-container {
   position: relative;
   width: fit-content;
+  & .sheet_number {
+    font-weight: 600;
+    font-size: 20px;
+    position: absolute;
+  }
   & .cut-layout-width {
     // width: 100%;
     text-align: center;

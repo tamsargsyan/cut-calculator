@@ -2,8 +2,7 @@ import { CutOptimizer, Shape } from "cut-optimizer";
 import "./style.scss";
 import { useDispatch, useSelector } from "react-redux";
 import ROTATE from "../../assets/rotate.png";
-import { useEffect, useState } from "react";
-import { uniqueId } from "lodash";
+import { useEffect } from "react";
 import { materials } from "../Materials/materialsData";
 import { rotateDimension } from "../../redux/actions";
 
@@ -25,17 +24,17 @@ const CutOptimizerAlgorithm = ({ sheets, setSheets }) => {
     }
   });
 
-  let sheetObj = {};
-  let uniqID = 0;
+  // let sheetObj = {};
+  // let uniqID = 0;
 
-  // const [sheets, setSheets] = useState([]);
+  // // const [sheets, setSheets] = useState([]);
 
-  let xx = [];
+  // let xx = [];
 
   const cut_opt = new CutOptimizer(SHEET_HEIGHT, SHEET_WIDTH);
   //const shapes = modifiedData.map(data => new Shape(+data.height, +data.width));
 
-  let x = 0;
+  // let x = 0;
   useEffect(() => {
     const shapes = modifiedData.map(function (data) {
       let obj = new Shape(+data.height, +data.width);
@@ -78,7 +77,7 @@ const CutOptimizerAlgorithm = ({ sheets, setSheets }) => {
     }
 
     setSheets(sheetObj);
-  }, [dimensions]);
+  }, [dimensions]); // eslint-disable-line
 
   const percent = 63.5;
   const calcPercent = val => {
@@ -90,7 +89,6 @@ const CutOptimizerAlgorithm = ({ sheets, setSheets }) => {
   // console.log("sheets >>", sheets);
 
   const dispatch = useDispatch();
-
   return (
     <div className='cut-optimizer-container'>
       {sheets.map((sheet, i) => (
@@ -121,18 +119,14 @@ const CutOptimizerAlgorithm = ({ sheets, setSheets }) => {
                     height: `${height}px`,
                     marginLeft: `${marginLeft}px`,
                     marginTop: `${marginTop}px`,
-                    background: dimensions[i]?.color,
+                    // background: dimensions[i]?.layerColor,
                   }}>
                   <button
                     className='rotateBtn'
                     onClick={() => {
                       // console.log(item);
                       dispatch(
-                        rotateDimension(
-                          item.item.width,
-                          item.item.height,
-                          uniqueId()
-                        )
+                        rotateDimension(item.item.width, item.item.height)
                       );
                     }}>
                     <img src={ROTATE} alt='Rotate' className='rotateImg' />

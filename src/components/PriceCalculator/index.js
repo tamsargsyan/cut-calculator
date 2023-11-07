@@ -1,11 +1,10 @@
 import { useSelector } from "react-redux";
-import PLUS_ICON from "../../assets/icons/plus.svg";
+// import PLUS_ICON from "../../assets/icons/plus.svg";
 import "./style.scss";
 
 const PriceCalculator = ({ sheets }) => {
   let id = 0;
   const dimensions = useSelector(state => state.dimensions);
-  console.log(dimensions);
   const modifiedData = dimensions.flatMap(item => {
     if (+item.quantity > 1) {
       return Array.from({ length: +item.quantity }, () => ({

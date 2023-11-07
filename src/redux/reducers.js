@@ -1,4 +1,3 @@
-import { uniqueId } from "lodash";
 import { ActionTypes } from "./constants";
 
 const initialState = {
@@ -22,9 +21,7 @@ const reducer = (state = initialState, action) => {
     case ActionTypes.REMOVE_DIMENSION:
       return {
         ...state,
-        dimensions: state.dimensions.filter(
-          dim => dim.id !== action.payload.id
-        ),
+        dimensions: state.dimensions.filter((_, i) => i !== action.payload.idx),
       };
     case ActionTypes.UPDATE_DIMENSION:
       const { id, key, value } = action.payload;
@@ -39,7 +36,7 @@ const reducer = (state = initialState, action) => {
         dimensions: updatedDimensions,
       };
     case ActionTypes.ROTATE_DIMENSION:
-      const { width, height, newId } = action.payload;
+      const { width, height } = action.payload;
       const existingDimensionIndex = state.dimensions.findIndex(
         dim => +dim.width === height && +dim.height === width
       );

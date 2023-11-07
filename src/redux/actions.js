@@ -12,21 +12,20 @@ export const addDimension = dimension => ({
     dimension,
   },
 });
-export const removeDimension = id => ({
+export const removeDimension = idx => ({
   type: ActionTypes.REMOVE_DIMENSION,
   payload: {
-    id,
+    idx,
   },
 });
 export const updateDimension = (id, key, value) => ({
   type: ActionTypes.UPDATE_DIMENSION,
   payload: { id, key, value },
 });
-export const rotateDimension = (width, height, newId) => ({
+export const rotateDimension = (width, height) => ({
   type: ActionTypes.ROTATE_DIMENSION,
   payload: {
     width,
     height,
-    newId,
   },
 });
